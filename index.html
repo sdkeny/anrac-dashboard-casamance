@@ -134,6 +134,29 @@
 
   /* ── LEAFLET POPUP ── */
   .lpop b { color:#1B4F72; }
+
+  /* ── RECOMMANDATIONS ── */
+  .reco-card { border-left: 4px solid var(--reco-color, #1B4F72) !important; }
+  .reco-header { display:flex; align-items:center; gap:8px; margin-bottom:8px; }
+  .reco-icon { font-size:26px; }
+  .reco-badge {
+    font-size:10px; font-weight:700; letter-spacing:.6px;
+    color:#fff; padding:3px 10px; border-radius:12px;
+    background: var(--reco-color, #1B4F72);
+  }
+  .reco-card h3 { border-bottom:none; margin-bottom:6px; font-size:14px; color:#1B4F72; }
+  .reco-desc { font-size:13px; color:#555; line-height:1.6; margin-top:4px; }
+  .reco-stat {
+    margin-top:10px; padding:8px 12px;
+    background:#f4f6f8; border-radius:6px;
+    font-size:12px; font-weight:600; color:#444;
+  }
+  .reco-intro {
+    background:linear-gradient(135deg,#1B4F72 0%,#2E86AB 100%);
+    color:#fff; border-radius:12px; padding:18px 20px;
+    margin-bottom:18px; font-size:13px; line-height:1.7;
+  }
+  .reco-intro h3 { color:#fff; border:none; font-size:16px; margin-bottom:6px; }
 </style>
 </head>
 <body>
@@ -161,6 +184,7 @@
   <button class="tab-btn" onclick="showTab('vie',this)">🏠 Conditions de vie</button>
   <button class="tab-btn" onclick="showTab('besoins',this)">💬 Besoins &amp; Satisfaction</button>
   <button class="tab-btn" onclick="showTab('carte',this)">🗺️ Carte</button>
+  <button class="tab-btn" onclick="showTab('recos',this)">⭐ Recommandations</button>
 </div>
 
 <!-- ════════ ONGLET : GÉOGRAPHIE ════════ -->
@@ -252,6 +276,107 @@
     <h3>Localisation des ménages enquêtés</h3>
     <div id="map"></div>
     <p class="map-info" id="mapInfo"></p>
+  </div>
+</div>
+
+<!-- ════════ ONGLET : RECOMMANDATIONS ════════ -->
+<div class="tab-pane" id="tab-recos">
+
+  <div class="reco-intro">
+    <h3>⭐ Recommandations prioritaires – Enquête ANRAC 2025</h3>
+    Ces 8 recommandations sont fondées sur les réponses des 115 ménages rapatriés enquêtés en Casamance.
+    Elles visent à guider les interventions de l'ANRAC et de ses partenaires pour améliorer les conditions de réintégration durable.
+  </div>
+
+  <div class="g1">
+    <div class="card">
+      <h3>Problèmes signalés par les ménages – Base des recommandations</h3>
+      <canvas id="cRecoBase" style="max-height:320px"></canvas>
+    </div>
+  </div>
+
+  <div class="g2">
+
+    <div class="card reco-card" style="--reco-color:#E74C3C">
+      <div class="reco-header">
+        <span class="reco-icon">💼</span>
+        <span class="reco-badge" style="background:#E74C3C">PRIORITÉ 1</span>
+      </div>
+      <h3>Emploi &amp; Activités Génératrices de Revenus</h3>
+      <p class="reco-desc">Mettre en place des programmes AGR ciblés (maraîchage, transformation agroalimentaire, élevage) et faciliter l'accès aux microcrédits et aux formations professionnelles pour les ménages rapatriés en âge de travailler.</p>
+      <div class="reco-stat">💼 74 ménages (64,3%) citent le chômage comme problème majeur</div>
+    </div>
+
+    <div class="card reco-card" style="--reco-color:#D35400">
+      <div class="reco-header">
+        <span class="reco-icon">🐄</span>
+        <span class="reco-badge" style="background:#D35400">PRIORITÉ 2</span>
+      </div>
+      <h3>Protection du Bétail &amp; Sécurité Agricole</h3>
+      <p class="reco-desc">Mettre en place des mesures de sécurisation du cheptel (clôtures communautaires, gardiennage) et accompagner les ménages agricoles avec des intrants, semences certifiées et équipements adaptés aux cultures locales.</p>
+      <div class="reco-stat">🐄 73 ménages (63,5%) signalent le vol de bétail · 94% pratiquent l'agriculture</div>
+    </div>
+
+    <div class="card reco-card" style="--reco-color:#F18F01">
+      <div class="reco-header">
+        <span class="reco-icon">⚡</span>
+        <span class="reco-badge" style="background:#F18F01">PRIORITÉ 3</span>
+      </div>
+      <h3>Électricité &amp; Accès à l'Énergie</h3>
+      <p class="reco-desc">Accélérer l'électrification rurale dans les zones de retour. Promouvoir les solutions solaires (kits solaires individuels, mini-réseaux collectifs) comme alternative rapide et durable dans les villages isolés non couverts par le réseau national.</p>
+      <div class="reco-stat">⚡ 69 ménages (60%) sans accès à l'électricité</div>
+    </div>
+
+    <div class="card reco-card" style="--reco-color:#8E44AD">
+      <div class="reco-header">
+        <span class="reco-icon">🤝</span>
+        <span class="reco-badge" style="background:#8E44AD">PRIORITÉ 4</span>
+      </div>
+      <h3>Accompagnement Post-Retour &amp; Routes</h3>
+      <p class="reco-desc">Intensifier le suivi social, juridique et administratif des ménages rapatriés. Réhabiliter les pistes rurales reliant les villages de retour aux marchés, postes de santé et écoles pour réduire l'isolement.</p>
+      <div class="reco-stat">🤝 66 ménages sans accompagnement · 66 ménages citent les routes comme obstacle</div>
+    </div>
+
+    <div class="card reco-card" style="--reco-color:#16A085">
+      <div class="reco-header">
+        <span class="reco-icon">📡</span>
+        <span class="reco-badge" style="background:#16A085">PRIORITÉ 5</span>
+      </div>
+      <h3>Réseau Mobile &amp; Connectivité Numérique</h3>
+      <p class="reco-desc">Plaider auprès des opérateurs télécoms pour l'extension de la couverture réseau dans les zones rurales de retour. L'accès au mobile money, aux informations agricoles et aux services d'urgence est un besoin fondamental.</p>
+      <div class="reco-stat">📡 64 ménages (55,7%) signalent l'absence de réseau mobile</div>
+    </div>
+
+    <div class="card reco-card" style="--reco-color:#E74C3C" style="opacity:.85">
+      <div class="reco-header">
+        <span class="reco-icon">🏥</span>
+        <span class="reco-badge" style="background:#C0392B">PRIORITÉ 6</span>
+      </div>
+      <h3>Santé &amp; Eau Potable</h3>
+      <p class="reco-desc">Construire et réhabiliter des forages et puits dans les villages de retour. Renforcer les postes de santé, assurer la disponibilité de médicaments essentiels et organiser des missions médicales mobiles pour les zones enclavées.</p>
+      <div class="reco-stat">🏥 64 ménages signalent des problèmes de santé · 63 pour l'accès à l'eau</div>
+    </div>
+
+    <div class="card reco-card" style="--reco-color:#2E86AB">
+      <div class="reco-header">
+        <span class="reco-icon">🎓</span>
+        <span class="reco-badge" style="background:#2E86AB">PRIORITÉ 7</span>
+      </div>
+      <h3>Scolarisation &amp; Accessibilité</h3>
+      <p class="reco-desc">Renforcer l'offre éducative dans les zones de retour (réhabilitation d'écoles, recrutement d'enseignants, bourses scolaires). Améliorer l'accès physique aux services essentiels pour les ménages éloignés des centres urbains.</p>
+      <div class="reco-stat">🎓 53 ménages signalent des problèmes d'accessibilité · 51 pour la scolarisation</div>
+    </div>
+
+    <div class="card reco-card" style="--reco-color:#1B4F72">
+      <div class="reco-header">
+        <span class="reco-icon">🌍</span>
+        <span class="reco-badge" style="background:#1B4F72">PRIORITÉ 8</span>
+      </div>
+      <h3>Accès au Foncier &amp; Sécurisation</h3>
+      <p class="reco-desc">Faciliter la résolution des conflits fonciers et sécuriser les droits d'accès à la terre pour les ménages rapatriés. Appuyer les démarches administratives de reconnaissance des titres fonciers et créer un mécanisme de médiation communautaire.</p>
+      <div class="reco-stat">🌍 20 ménages signalent des problèmes d'accès à la terre (source de revenus primaire)</div>
+    </div>
+
   </div>
 </div>
 
@@ -626,6 +751,41 @@ function filterTable(){
   const q = document.getElementById("searchBesoins").value.toLowerCase();
   document.querySelectorAll("#tbodyBesoins tr").forEach(tr=>{
     tr.style.display = tr.textContent.toLowerCase().includes(q) ? "" : "none";
+  });
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// ══ RECOMMANDATIONS
+// ─────────────────────────────────────────────────────────────────────────
+{
+  const sv = sortByVal(D.problemes);
+  const total = D.kpi.menages;
+  const bgColors = sv.vals.map(v => {
+    if(v >= 70) return '#E74C3C';
+    if(v >= 60) return '#F18F01';
+    if(v >= 50) return '#8E44AD';
+    return '#2E86AB';
+  });
+  makeChart("cRecoBase","bar",sv.keys,[{
+    label:"Ménages affectés",
+    data: sv.vals,
+    backgroundColor: bgColors,
+    borderRadius: 4,
+  }],{
+    indexAxis:"y",
+    plugins:{
+      legend:{ display:false },
+      tooltip:{
+        callbacks:{
+          label:(ctx)=>`${ctx.parsed.x} ménages (${(ctx.parsed.x/total*100).toFixed(1)}%)`
+        }
+      }
+    },
+    scales:{
+      x:{ beginAtZero:true, max:115, grid:{color:"#f0f0f0"},
+          title:{display:true,text:`Ménages affectés (sur ${total})`} },
+      y:{ grid:{display:false}, ticks:{font:{size:11}} }
+    }
   });
 }
 
